@@ -2,6 +2,8 @@ import "./App.css";
 import { connect } from "react-redux";
 function App(props) {
   console.log("inside app", props);
+
+  //increase by 1 function
   const increase = () => {
     props.dispatch({ type: "ADD" });
   };
@@ -18,6 +20,6 @@ function mapStatetoProps({ post }) {
     post,
   };
 }
-
+//connecting App component to state
 const connectedCompo = connect(mapStatetoProps)(App);
 export default connectedCompo;
