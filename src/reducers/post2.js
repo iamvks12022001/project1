@@ -1,16 +1,16 @@
 const initialState = {
-  post: 0,
+  post2: 0,
 };
 
-export function post(state = initialState, action) {
-  console.log("in post render");
+export function post2(state = initialState, action) {
+  console.log("in post2 render");
   switch (action.type) {
     //action for adding
-    case "ADD":
-      const temp = state.post + 1;
+    case "SUB":
+      const temp = state.post2 - 1;
       return {
         ...state,
-        post: temp,
+        post2: temp,
       };
     default:
       return {
