@@ -1,39 +1,29 @@
 import "./App.css";
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
+import Post from "./Post";
 
-import App1 from "../component/App1";
 function App(props) {
-  console.log("inside app", props);
+  console.log("inside app");
 
-  //increase by 1 function
-  const increase = () => {
-    props.dispatch({ type: "ADD" });
-  };
-  // const decrease = () => {
-  //   props.dispatch({ type: "SUB" });
-  // };
   useEffect(() => {
-    console.log("ccdm");
-  });
+    console.log("inside app ccdm");
+  }, []);
 
   return (
     <div>
-      <div className="App">APP value-{props.post.post}</div>
-      <button onClick={increase} />
-      <App1 value={props.post2.post2} dispatch={props.dispatch} />
-      {/* <div className="App">APP value-{props.post2.post2}</div>
-      <button onClick={decrease} /> */}
+      {console.log("inside app retun")}
+      <Post />
     </div>
   );
 }
 
-function mapStatetoProps({ post, post2 }) {
+function mapStatetoProps(store) {
+  console.log("inside app map to props");
   return {
-    post,
-    post2,
+    store,
   };
 }
-//connecting App component to state
+
 const connectedCompo = connect(mapStatetoProps)(App);
 export default connectedCompo;

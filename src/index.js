@@ -7,7 +7,7 @@ import { storeConfig } from "./store";
 import thunk from "redux-thunk";
 import logger from "redux-logger";
 import { Provider } from "react-redux";
-//to get store from store file
+
 const store = storeConfig({ thunk, logger });
 
 console.log("Store :", store.getState());

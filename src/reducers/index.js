@@ -1,8 +1,6 @@
 import { combineReducers } from "redux";
-import { post } from "./post";
-import { post2 } from "./post2";
+import { twidata } from "./twiRed";
 
 export default combineReducers({
-  post,
-  post2,
+  twidata,
 });
