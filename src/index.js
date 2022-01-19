@@ -7,6 +7,7 @@ import { storeConfig } from "./store";
 import thunk from "redux-thunk";
 import logger from "redux-logger";
 import { Provider } from "react-redux";
+import "bootstrap/dist/css/bootstrap.min.css"; //for reactstrap for later part
 
 const store = storeConfig({ thunk, logger });
 

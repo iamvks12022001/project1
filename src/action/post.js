@@ -1,5 +1,6 @@
 export const GET_TREND = "GET_TREND";
 export const GET_TwiUser = "GET_TwiUser";
+export const GET_TwiTrend = "GET_TwiTrend";
 
 function getUser(data) {
   return {
@@ -15,9 +16,10 @@ function getTwitrend(data) {
   };
 }
 
-export function getTwitrendAction() {
+export function getTwitrendAction(searchTrend) {
+  console.log("search trend", searchTrend);
   return (dispatch) => {
-    fetch("https://twitter-trend.p.rapidapi.com/trend/india", {
+    fetch(`https://twitter-trend.p.rapidapi.com/trend/${searchTrend}`, {
       method: "GET",
       headers: {
         "x-rapidapi-host": "twitter-trend.p.rapidapi.com",
@@ -25,7 +27,7 @@ export function getTwitrendAction() {
       },
     })
       .then((response) => response.json())
-      .then((response) => response.slice(0, 15))
+      .then((response) => response.slice(0, Math.min(response.length, 15)))
       .then((response) => {
         dispatch(getTwitrend(response));
       })
@@ -48,6 +50,33 @@ export function getUserAction(searchUser) {
 
       .then((response) => {
         dispatch(getUser(response));
+      })
+
+      .catch((err) => {
+        console.error(err);
+      });
+  };
+}
+
+function getTrendTweetAction(data) {
+  return {
+    type: GET_TwiTrend,
+    data: data,
+  };
+}
+export function getTrendtweets(name) {
+  return (dispatch) => {
+    fetch(`https://twitterfetch.p.rapidapi.com/hashtag/${name}`, {
+      method: "GET",
+      headers: {
+        "x-rapidapi-host": "twitterfetch.p.rapidapi.com",
+        "x-rapidapi-key": "1b661df6f8msh948a3f3406fe630p11da3ajsn95eeb1e38704",
+      },
+    })
+      .then((response) => response.json())
+
+      .then((response) => {
+        dispatch(getTrendTweetAction(response));
       })
 
       .catch((err) => {

@@ -1,25 +1,43 @@
-import React, { useEffect, useState, useCallback } from "react";
+import React, { useState } from "react";
 import { connect } from "react-redux";
-import { getTwitrendAction, getUserAction } from "../action/post";
+import {
+  getTwitrendAction,
+  getUserAction,
+  getTrendtweets,
+} from "../action/post";
 
 function Post(props) {
   var [searchUser, setUser] = useState("");
+  var [searchTrend, setTrend] = useState("");
+  var [trendTweet, setTrendTweett] = useState("");
 
-  const handleSearchClick = useCallback(() => {
+  const handleSearchClick = () => {
     const { dispatch } = props;
     dispatch(getUserAction(searchUser));
-  }, [searchUser]);
+  };
 
   const handleSearch = (e) => {
     var searchText = e.target.value;
     setUser(searchText);
   };
-  useEffect(() => {
+
+  //for finding trends of a country
+  const handleTrendClick = () => {
     const { dispatch } = props;
-    dispatch(getTwitrendAction());
-  }, []);
-  console.log("props", props);
-  const { Twipost, Twitrend } = props.twidata;
+    dispatch(getTwitrendAction(searchTrend));
+  };
+
+  const handleTrend = (e) => {
+    var searchText = e.target.value;
+    setTrend(searchText);
+  };
+
+  // useEffect(() => {
+  //   //const { dispatch } = props;
+  //   // dispatch(getTwitrendAction());
+  // }, []);
+
+  const { Twipost, Twitrend, TrendPost } = props.twidata;
 
   return (
     <div>
@@ -36,11 +54,40 @@ function Post(props) {
             </div>
           );
         })}
+
+      <div>
+        <input placeholder="country_name" onChange={handleTrend} />
+        <button onClick={handleTrendClick} />
+      </div>
       {Twitrend &&
         Twitrend.map((ele, index) => {
           return (
             <div>
-              post {index} is {ele.Trend.name}
+              trend {index} is {ele.Trend.name}
+              <div>
+                <button
+                  onClick={() => {
+                    setTrendTweett(ele.Trend.name);
+                    props.dispatch(getTrendtweets(ele.Trend.name));
+                  }}
+                >
+                  {" "}
+                  Click here To get more tweets in this trend !
+                </button>
+              </div>
+              <div>
+                {trendTweet === ele.Trend.name &&
+                  Array.isArray(TrendPost) &&
+                  TrendPost.map((ele, index) => {
+                    console.log("aaaaaa", TrendPost.length);
+                    return (
+                      <div>
+                        post {index} is {ele.text} by {ele.user_screen_name} and
+                        no of retweet {ele.retweet_count}
+                      </div>
+                    );
+                  })}
+              </div>
             </div>
           );
         })}

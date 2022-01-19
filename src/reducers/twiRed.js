@@ -1,13 +1,14 @@
-import { GET_TREND } from "../action/post";
-import { GET_TwiUser } from "../action/post";
+import { GET_TREND, GET_TwiUser, GET_TwiTrend } from "../action/post";
+
 const initialState = {
   TwiUser: [], //have all the of every post
   Twipost: [], //have data of post and created at and usename
-  Twitrend: [],
+  Twitrend: [], //contain trending list
+  TrendPost: [], //contain tweets of a trends
 };
 
 export function twidata(state = initialState, action) {
-  console.log("in post render");
+  console.log("in post reducer");
   switch (action.type) {
     case GET_TREND:
       return {
@@ -39,6 +40,13 @@ export function twidata(state = initialState, action) {
         TwiUser: new_Twiusers,
         Twipost: new_Twipost,
       };
+
+    case GET_TwiTrend:
+      return {
+        ...state,
+        TrendPost: action.data,
+      };
+
     default:
       return {
         ...state,
