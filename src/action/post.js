@@ -17,13 +17,12 @@ function getTwitrend(data) {
 }
 
 export function getTwitrendAction(searchTrend) {
-  console.log("search trend", searchTrend);
   return (dispatch) => {
     fetch(`https://twitter-trend.p.rapidapi.com/trend/${searchTrend}`, {
       method: "GET",
       headers: {
         "x-rapidapi-host": "twitter-trend.p.rapidapi.com",
-        "x-rapidapi-key": "1b661df6f8msh948a3f3406fe630p11da3ajsn95eeb1e38704",
+        "x-rapidapi-key": process.env.REACT_APP_KEY_ID,
       },
     })
       .then((response) => response.json())
@@ -43,7 +42,7 @@ export function getUserAction(searchUser) {
       method: "GET",
       headers: {
         "x-rapidapi-host": "twitterfetch.p.rapidapi.com",
-        "x-rapidapi-key": "1b661df6f8msh948a3f3406fe630p11da3ajsn95eeb1e38704",
+        "x-rapidapi-key": process.env.REACT_APP_KEY_ID,
       },
     })
       .then((response) => response.json())
@@ -70,7 +69,7 @@ export function getTrendtweets(name) {
       method: "GET",
       headers: {
         "x-rapidapi-host": "twitterfetch.p.rapidapi.com",
-        "x-rapidapi-key": "1b661df6f8msh948a3f3406fe630p11da3ajsn95eeb1e38704",
+        "x-rapidapi-key": process.env.REACT_APP_KEY_ID,
       },
     })
       .then((response) => response.json())
