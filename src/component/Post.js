@@ -1,10 +1,6 @@
 import React, { useEffect, useState, useCallback } from "react";
 import { connect } from "react-redux";
-import {
-  getTwipostAction,
-  getTwitrendAction,
-  getUserAction,
-} from "../action/post";
+import { getTwitrendAction, getUserAction } from "../action/post";
 
 function Post(props) {
   var [searchUser, setUser] = useState("");
@@ -20,28 +16,28 @@ function Post(props) {
   };
   useEffect(() => {
     const { dispatch } = props;
-    dispatch(getTwipostAction());
     dispatch(getTwitrendAction());
   }, []);
+  console.log("props", props);
+  const { Twipost, Twitrend } = props.twidata;
 
-  const { arr, arr1 } = props;
-  console.log("arr", arr, "arr1", arr1);
   return (
     <div>
       <div>
         <input placeholder=" User Name" onChange={handleSearch} />
         <button onClick={handleSearchClick} />
       </div>
-      {arr &&
-        arr.map((ele, index) => {
+      {Twipost &&
+        Twipost.map((ele, index) => {
+          console.log("aaaaaa", Twipost.length);
           return (
             <div>
               post {index} is {ele.text}
             </div>
           );
         })}
-      {arr1 &&
-        arr1.map((ele, index) => {
+      {Twitrend &&
+        Twitrend.map((ele, index) => {
           return (
             <div>
               post {index} is {ele.Trend.name}
@@ -52,10 +48,9 @@ function Post(props) {
   );
 }
 
-function mapStatetoProps({ twidata }) {
+function mapStatetoProps(store) {
   return {
-    arr: twidata.Twipost,
-    arr1: twidata.Twitrend,
+    ...store,
   };
 }
 

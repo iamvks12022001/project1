@@ -21,7 +21,7 @@ function App(props) {
 function mapStatetoProps(store) {
   console.log("inside app map to props");
   return {
-    store,
+    ...store,
   };
 }
 
