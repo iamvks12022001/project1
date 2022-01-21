@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 import {
   getTwitrendAction,
   getUserAction,
@@ -42,12 +43,16 @@ function Post(props) {
   return (
     <div>
       <div>
+        <Link to="../">
+          <button>go to home page</button>
+        </Link>
+      </div>
+      <div>
         <input placeholder=" User Name" onChange={handleSearch} />
         <button onClick={handleSearchClick} />
       </div>
       {Twipost &&
         Twipost.map((ele, index) => {
-          console.log("aaaaaa", Twipost.length);
           return (
             <div>
               post {index} is {ele.text}
@@ -79,7 +84,6 @@ function Post(props) {
                 {trendTweet === ele.Trend.name &&
                   Array.isArray(TrendPost) &&
                   TrendPost.map((ele, index) => {
-                    console.log("aaaaaa", TrendPost.length);
                     return (
                       <div>
                         post {index} is {ele.text} by {ele.user_screen_name} and

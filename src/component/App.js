@@ -3,6 +3,8 @@ import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import Post from "./Post";
 
+import { Route, Routes, BrowserRouter as Router } from "react-router-dom";
+import { Home } from "./Home";
 function App(props) {
   console.log("inside app");
 
@@ -13,7 +15,12 @@ function App(props) {
   return (
     <div>
       {console.log("inside app retun")}
-      <Post />
+      <Router>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/tweeter" element={<Post />} />
+        </Routes>
+      </Router>
     </div>
   );
 }

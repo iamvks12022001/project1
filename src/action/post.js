@@ -22,7 +22,7 @@ export function getTwitrendAction(searchTrend) {
       method: "GET",
       headers: {
         "x-rapidapi-host": "twitter-trend.p.rapidapi.com",
-        "x-rapidapi-key": process.env.REACT_APP_KEY_ID,
+        "x-rapidapi-key": "1b661df6f8msh948a3f3406fe630p11da3ajsn95eeb1e38704",
       },
     })
       .then((response) => response.json())
@@ -64,12 +64,17 @@ function getTrendTweetAction(data) {
   };
 }
 export function getTrendtweets(name) {
+  if (name[0] === "#") {
+    name = name.substring(1, name.length);
+    console.log("search ", name);
+  }
+  console.log("req id ", `https://twitterfetch.p.rapidapi.com/hashtag/${name}`);
   return (dispatch) => {
     fetch(`https://twitterfetch.p.rapidapi.com/hashtag/${name}`, {
       method: "GET",
       headers: {
         "x-rapidapi-host": "twitterfetch.p.rapidapi.com",
-        "x-rapidapi-key": process.env.REACT_APP_KEY_ID,
+        "x-rapidapi-key": "1b661df6f8msh948a3f3406fe630p11da3ajsn95eeb1e38704",
       },
     })
       .then((response) => response.json())
